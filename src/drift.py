@@ -14,8 +14,8 @@ result = report.as_dict()
 
 drift = result["metrics"][0]["result"]["dataset_drift"]
 
-print(json.dumps(result["metrics"][0]["result"], indent=2))
 print("drift:", drift)
 
 if drift:
-    exit(1)
+    with open("drift_flag.txt", "w") as f:
+        f.write("drift")

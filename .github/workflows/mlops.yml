@@ -8,11 +8,9 @@ on:
 
 jobs:
   train:
-
     runs-on: ubuntu-latest
 
     steps:
-
     - name: checkout
       uses: actions/checkout@v3
 
@@ -24,7 +22,7 @@ jobs:
       run: python src/drift.py
 
     - name: retrain if drift
-      if: failure()
+      if: hashFiles('drift_flag.txt') != ''
       run: python src/train.py
 
     - name: docker build
