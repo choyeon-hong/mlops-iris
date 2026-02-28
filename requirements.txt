@@ -2,7 +2,7 @@ pandas
 numpy
 scikit-learn
 mlflow
-evidently
+evidently == 0.7.20
 joblib
 fastapi
 uvicorn
