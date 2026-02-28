@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: retrain-job
+
+spec:
+  template:
+    spec:
+      containers:
+      - name: retrain
+        image: mlops-iris
+        imagePullPolicy: Never
+        command: ["python","src/train.py"]
+
+      restartPolicy: Never

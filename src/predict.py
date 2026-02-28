@@ -1,0 +1,19 @@
+import joblib
+import numpy as np
+from fastapi import FastAPI
+
+app = FastAPI()
+
+model = joblib.load("model/model.pkl")
+
+@app.get("/")
+def health():
+    return {"status": "ok"}
+
+@app.post("/predict")
+def predict(data: list):
+
+    arr = np.array(data).reshape(1, -1)
+    pred = model.predict(arr)
+
+    return {"prediction": int(pred[0])}

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-api
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: iris
+
+  template:
+    metadata:
+      labels:
+        app: iris
+
+    spec:
+      containers:
+      - name: iris
+        image: mlops-iris
+        imagePullPolicy: Never
+        command: ["uvicorn"]
+        args: ["src.predict:app","--host","0.0.0.0","--port","8000"]
+        ports:
+        - containerPort: 8000
