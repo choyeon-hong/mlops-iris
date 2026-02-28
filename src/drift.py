@@ -13,7 +13,10 @@ report.run(reference_data=ref, current_data=new)
 
 result = report.as_dict()
 
-feature_metrics = result["metrics"][0]["result"]["drift_by_columns"]
+dataset_drift = result["metrics"][0]["result"]["dataset_drift"]
+feature_metrics = result["metrics"][0]["result"]["drift_by_features"]
+
+print("dataset drift:", dataset_drift)
 
 drift_detected = False
 
@@ -21,8 +24,6 @@ for k, v in feature_metrics.items():
     print(k, v["drift_detected"])
     if v["drift_detected"]:
         drift_detected = True
-
-print("feature drift:", drift_detected)
 
 if drift_detected:
     exit(1)
