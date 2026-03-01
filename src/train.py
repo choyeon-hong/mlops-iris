@@ -18,7 +18,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 mlflow.set_experiment("iris")
 
 with mlflow.start_run():
-
+    # mlflow.sklearn.autolog()
     model = RandomForestClassifier()
     model.fit(X_train, y_train)
 
@@ -26,7 +26,7 @@ with mlflow.start_run():
     acc = accuracy_score(y_test, preds)
 
     mlflow.log_metric("accuracy", acc)
+    # mlflow.sklearn.log_model(model, "model")
 
     joblib.dump(model, "model/model.pkl")
-
 print("train done")
